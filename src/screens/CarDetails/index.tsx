@@ -23,8 +23,10 @@ import {
     Period,
     Price,
     About,
-    Accessories  
+    Accessories,
+    Footer  
 } from './styles'
+import { Button } from '../../components/Button';
 
 export function CarDetails(){
   return(
@@ -63,6 +65,10 @@ export function CarDetails(){
             É um automóvel muito top, você precisa ver
           </About>
         </Content>
+
+        <Footer>
+          <Button title="Confirmar" />
+        </Footer>
       
     </Container>
   )
