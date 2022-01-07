@@ -2,6 +2,7 @@ import React from 'react'
 import { Accessory } from '../../components/Accessory'
 import { BackButton } from '../../components/BackButton'
 import { ImageSlider } from '../../components/ImageSlider'
+import { useNavigation } from '@react-navigation/native';
 
 import speedtSvg from '../../assets/speed.svg';
 import accelerationtSvg from '../../assets/acceleration.svg';
@@ -28,7 +29,14 @@ import {
 } from './styles'
 import { Button } from '../../components/Button';
 
+
 export function CarDetails(){
+  const navigation = useNavigation<any>();
+
+  function handleConfirmRental() {
+    navigation.navigate('Scheduling');
+  }
+
   return(
     <Container>
         <Header>
@@ -67,7 +75,7 @@ export function CarDetails(){
         </Content>
 
         <Footer>
-          <Button title="Confirmar" />
+          <Button title="Escolher período do aluguel" onPress={handleConfirmRental} />
         </Footer>
       
     </Container>
