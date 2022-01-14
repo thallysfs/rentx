@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 
 import Logo from '../../assets/logo.svg';
+import {api} from '../../services/api';
+import { CarDTO } from '../../dtos/CarDto';
+import { Load } from '../../components/Load'
 
 import { Car } from '../../components/Car';
 
@@ -16,21 +19,29 @@ import {
 } from './styles'
 
 export function Home(){
+  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation<any>();
 
-  const carData = {
-    brand: 'Audi',
-    name: 'RS 5 Coupé',
-    rent: {
-        period: 'Ao dia',
-        price: 120
-    },
-    thumbnail: 'https://www.pngall.com/wp-content/uploads/2016/05/Audi-Free-Download-PNG.png'
-  }  
-
-  function handleCarDetails() {
-    navigation.navigate('CarDetails');
+  function handleCarDetails(car: CarDTO) {
+    navigation.navigate('CarDetails', { car });
   }
+
+  useEffect(() => {
+    async function fetchCars(){
+      try {
+        const response = await api.get('/cars');
+        setCars(response.data);
+
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCars();
+  },[])
 
 
   return(
@@ -51,13 +62,15 @@ export function Home(){
           </TotalCars>
       </HeaderContent>
       </Header>
-      <CarList 
-        data={([1,2,3,4.5, 6,7])}
-        keyExtractor={item => String(item)}
-        renderItem={( {item} ) =>  
-          <Car data={carData} onPress={handleCarDetails} />
-        }    
-      />      
+      { loading ? <Load /> :
+        <CarList 
+          data={cars}
+          keyExtractor={item => String(item.id)}
+          renderItem={( {item} ) =>  
+            <Car data={item} onPress={() => handleCarDetails(item)} />
+          }    
+        />   
+      }   
     </Container>
   )
 }
