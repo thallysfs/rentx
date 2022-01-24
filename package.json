@@ -37,7 +37,8 @@
     "react-native-svg-transformer": "^0.14.3",
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3",
-    "undefined": "@expo-google-fonts/inter/archivo"
+    "undefined": "@expo-google-fonts/inter/archivo",
+    "react-native-reanimated": "~2.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

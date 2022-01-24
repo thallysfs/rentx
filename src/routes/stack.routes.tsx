@@ -7,6 +7,7 @@ import { Scheduling } from '../screens/Scheduling'
 import { SchedulingDetails } from '../screens/SchedulingDetails'
 import { SchedulingComplete } from '../screens/SchedulingComplete'
 import { MyCars } from '../screens/MyCars'
+import { Splash } from '../screens/Splash'
 
 //navegação em stack (pilha)
 const { Navigator, Screen} = createNativeStackNavigator();
@@ -14,10 +15,15 @@ const { Navigator, Screen} = createNativeStackNavigator();
 export function StackRoutes(){
     return (
         <Navigator
+            initialRouteName='Splash'
             screenOptions={{
                 headerShown: false
             }}
         >
+            <Screen 
+                name='Splash'
+                component={Splash}
+            />   
             <Screen 
                 name='Home'
                 component={Home}
