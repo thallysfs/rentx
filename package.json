@@ -38,7 +38,8 @@
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3",
     "undefined": "@expo-google-fonts/inter/archivo",
-    "react-native-reanimated": "~2.3.1"
+    "react-native-reanimated": "~2.3.1",
+    "lottie-react-native": "5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
