@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
+import { PasswordInput } from '../../components/PasswordInput';
 
 import { 
   Container,
@@ -40,6 +41,10 @@ export function Signin(){
           keyboardType='email-address'
           autoCorrect={false}
           autoCapitalize="none"
+        />
+        <PasswordInput
+          iconName='lock'
+          placeholder='Senha'
         />
       </Form>
 
