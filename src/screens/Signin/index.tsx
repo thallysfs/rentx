@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { 
   StatusBar,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard 
+  Keyboard, 
+  Alert
 } from 'react-native'
 import { useTheme } from 'styled-components';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
+import * as Yup from 'yup'
+
 
 import { 
   Container,
@@ -24,6 +28,38 @@ export function Signin(){
   const theme = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+
+  function handleNewAccount(){
+    navigation.navigate('SignUpFirstStep')
+  }
+
+  async function handleSignIn(){
+    //definindo o esquema de validação dos inputs
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido'),
+        password: Yup.string()
+          .required('A senha é obrigatória')
+      });
+  
+      await schema.validate({email, password})
+      Alert.alert('Tudo certo!')
+
+      //Fazer login
+
+    } catch (error) {
+      //if para verificar se o erro é originado do Yup ou é uma excessão externa
+      if(error instanceof Yup.ValidationError){
+        Alert.alert('Opa', error.message)
+      }else {
+        Alert.alert('Erro na autenticação', error)
+      }
+    }
+
+  }
 
   return(
     <KeyboardAvoidingView behavior='position' enabled>
@@ -66,16 +102,16 @@ export function Signin(){
           <Footer>
             <Button
               title='Login'
-              onPress={() => {}}
-              enabled={false}
+              onPress={handleSignIn}
+              enabled={true}
               loading={false}
             />        
             <Button
               title='Criar conta gratuita'
               color={theme.colors.background_secondary}
               light
-              onPress={() => {}}
-              enabled={false}
+              onPress={handleNewAccount}
+              enabled={true}
               loading={false}
             />
           </Footer>

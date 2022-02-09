@@ -24,12 +24,14 @@
     "expo-font": "~10.0.4",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
+    "lottie-react-native": "5.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-calendars": "^1.505.0",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-iphone-x-helper": "^1.3.1",
+    "react-native-reanimated": "~2.3.1",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
@@ -38,8 +40,7 @@
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3",
     "undefined": "@expo-google-fonts/inter/archivo",
-    "react-native-reanimated": "~2.3.1",
-    "lottie-react-native": "5.0.1"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
