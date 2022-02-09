@@ -8,8 +8,9 @@ import { SchedulingDetails } from '../screens/SchedulingDetails'
 import { SchedulingComplete } from '../screens/SchedulingComplete'
 import { MyCars } from '../screens/MyCars'
 import { Splash } from '../screens/Splash'
-import { Signin } from '../screens/Signin'
+import { SignIn } from '../screens/SignIn'
 import { SignUpFirstStep } from '../screens/SignUp/SignUpFirstStep'
+import { SignUpSecondStep } from '../screens/SignUp/SignUpSecondStep'
 
 //navegação em stack (pilha)
 const { Navigator, Screen} = createNativeStackNavigator();
@@ -17,18 +18,22 @@ const { Navigator, Screen} = createNativeStackNavigator();
 export function StackRoutes(){
     return (
         <Navigator
-            initialRouteName='Splash'
+            initialRouteName='SignIn'
             screenOptions={{
                 headerShown: false
             }}
         >
             <Screen 
-                name='Signin'
-                component={Signin}
+                name='SignIn'
+                component={SignIn}
             />             
             <Screen 
                 name='SignUpFirstStep'
                 component={SignUpFirstStep}
+            /> 
+            <Screen 
+                name='SignUpSecondStep'
+                component={SignUpSecondStep}
             />   
             <Screen 
                 name='Home'

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { FlatList, ViewToken } from 'react-native'
+import { Bullet } from '../Bullet';
 import { 
     Container,
     ImageIndices,
-    ImageIndex,
     CarImageWrapper,
     CarImage, 
 } from './styles'
@@ -32,7 +32,7 @@ export function ImageSlider({imagesUrl}: Props){
                 // o map possui dois parâmetros, o item(o item em si que percorremos) e o index(a posição do item no array)
                 // ao usar o underline, eu oculto o primeiro parâmetro vistoque não irei usa-lo
                 imagesUrl.map((_, index) => (
-                    <ImageIndex
+                    <Bullet
                         key={String(index)} 
                         active={index === imageIndex}
                     />
