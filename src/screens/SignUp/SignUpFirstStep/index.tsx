@@ -1,8 +1,9 @@
-import React from 'react'
-import { Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import React, { useState } from 'react'
+import { Alert, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { BackButton } from '../../../components/BackButton'
 import { useNavigation } from '@react-navigation/native'
 import { Bullet } from '../../../components/Bullet';
+import * as Yup from 'yup'
 
 import { 
     Bullets,
@@ -18,15 +19,42 @@ import { Button } from '../../../components/Button';
 
 
 export function SignUpFirstStep(){
-    const navigation = useNavigation();
+    const[name, setName] = useState('');
+    const[email, setEmail] = useState('');
+    const[driveLicense, setDriveLicense] = useState('');
 
-    function handleNextStep(){
-      navigation.navigate('SignUpSecondStep')
-    }
+    const navigation = useNavigation();
 
     function handleBack(){
         navigation.goBack();
     }
+
+    async function handleNextStep(){
+        try {
+            const schema = Yup.object().shape({
+                driveLicense: Yup.string()
+                    .required('CNH é obrigatória'),
+                email: Yup.string()
+                    .email('E-mail inválido')
+                    .required('E-mail é obrigatório'),
+                name: Yup.string()
+                    .required('Nome obrigatório')
+
+            })
+
+            const data = {name, email, driveLicense}
+            await schema.validate(data);
+
+            navigation.navigate('SignUpSecondStep', {user: data})
+        } catch (error) {
+            if(error instanceof Yup.ValidationError){
+                Alert.alert('Opa', error.message);
+            }
+        }
+
+    }
+
+
 
     return(
     <KeyboardAvoidingView behavior='position' enabled>
@@ -55,16 +83,22 @@ export function SignUpFirstStep(){
                 <Input
                     iconName='user'
                     placeholder='Nome'
+                    onChangeText={setName}
+                    value={name}
                 />
                 <Input
                     iconName='mail'
                     placeholder='E-mail'
                     keyboardType='email-address'
+                    onChangeText={setEmail}
+                    value={email}
                 />
                 <Input
                     iconName='credit-card'
                     placeholder='CNH'
                     keyboardType='numeric'
+                    onChangeText={setDriveLicense}
+                    value={driveLicense}
                 />
             </Form>
 
